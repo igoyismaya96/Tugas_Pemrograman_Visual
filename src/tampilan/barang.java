@@ -13,6 +13,9 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author yogii
@@ -45,6 +48,7 @@ private void autoID() {
 }   
     public barang() {
         initComponents();
+        setLocationRelativeTo(null);
         conn = new koneksi().connect();
         autoID(); 
     datatable();
@@ -122,6 +126,7 @@ private void autoID() {
         tblbarang = new javax.swing.JTable();
         bcari = new javax.swing.JButton();
         txtcari = new javax.swing.JTextField();
+        btncetak = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -219,6 +224,13 @@ private void autoID() {
             }
         });
 
+        btncetak.setText("Cetak");
+        btncetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncetakActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -231,7 +243,8 @@ private void autoID() {
                         .addComponent(txtcari, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bcari)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btncetak)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -240,7 +253,8 @@ private void autoID() {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(bcari, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(txtcari))
+                    .addComponent(txtcari)
+                    .addComponent(btncetak, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addContainerGap())
@@ -486,6 +500,38 @@ private void autoID() {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbxbrgActionPerformed
 
+    private void btncetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncetakActionPerformed
+    try {
+
+        // KONEKSI DATABASE
+        Connection conn = new koneksi().connect();
+
+        // LOKASI FILE JASPER
+        String path = "src/report/databarang.jasper";
+
+        // LOAD FILE JASPER
+        JasperPrint jp = JasperFillManager.fillReport(
+            path,
+            null,
+            conn
+        );
+
+        // TAMPILKAN REPORT
+        JasperViewer.viewReport(
+            jp,
+            false
+        );
+
+    } catch (Exception e) {
+
+        JOptionPane.showMessageDialog(
+            null,
+            "Error Cetak : \n" + e.getMessage()
+        );
+
+    }
+    }//GEN-LAST:event_btncetakActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -527,6 +573,7 @@ private void autoID() {
     private javax.swing.JButton bhapus;
     private javax.swing.JButton bkeluar;
     private javax.swing.JButton bsimpan;
+    private javax.swing.JButton btncetak;
     private javax.swing.JButton bubah;
     private javax.swing.JComboBox<String> cmbxbrg;
     private javax.swing.JLabel jLabel1;

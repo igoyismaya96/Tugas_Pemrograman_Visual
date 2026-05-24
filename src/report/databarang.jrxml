@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="650" pageHeight="842" columnWidth="610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="da53a8e8-7b90-4de9-aede-7e8e9103da20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="296c6136-85d3-4c22-984a-13766709559c"/>
+	<subDataset name="New Dataset 1" uuid="88cbce0d-2418-4022-949f-90f05029093d">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     barang.`id_barang` AS barang_id_barang,
+     barang.`nama_barang` AS barang_nama_barang,
+     barang.`jenis` AS barang_jenis,
+     barang.`harga_beli` AS barang_harga_beli,
+     barang.`harga_jual` AS barang_harga_jual
+FROM
+     `barang` barang]]>
+		</queryString>
+		<field name="barang_id_barang" class="java.lang.String"/>
+		<field name="barang_nama_barang" class="java.lang.String"/>
+		<field name="barang_jenis" class="java.lang.String"/>
+		<field name="barang_harga_beli" class="java.lang.String"/>
+		<field name="barang_harga_jual" class="java.lang.String"/>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     barang.`id_barang` AS barang_id_barang,
+     barang.`nama_barang` AS barang_nama_barang,
+     barang.`jenis` AS barang_jenis,
+     barang.`harga_beli` AS barang_harga_beli,
+     barang.`harga_jual` AS barang_harga_jual
+FROM
+     `barang` barang]]>
+	</queryString>
+	<field name="barang_id_barang" class="java.lang.String"/>
+	<field name="barang_nama_barang" class="java.lang.String"/>
+	<field name="barang_jenis" class="java.lang.String"/>
+	<field name="barang_harga_beli" class="java.lang.String"/>
+	<field name="barang_harga_jual" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="238" y="21" width="165" height="37" uuid="3d0fe56a-5933-47ac-a738-97147417c779"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Barang]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-21" y="0" width="655" height="5" backcolor="#F8F8F8" uuid="7b5ed87b-5a2d-4d82-bc62-3b29f1e8f5da"/>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="0" y="0" width="610" height="33" uuid="f7f3e03b-92d8-47e5-9dbc-8e5d2c65dcae"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1" uuid="3386a977-159c-4a8c-baa1-67c09099baa9">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="99" uuid="486c38ed-89dc-4517-9c04-8ba92e1ba016">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="f2bfaf6f-6274-4740-9b9e-f9fc33d705a6"/>
+								<text><![CDATA[ID Barang]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="60bd8599-56fb-4a08-b6c6-71c3033b737a"/>
+								<textFieldExpression><![CDATA[$F{barang_id_barang}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="144" uuid="35f90bf0-2dee-4411-be8b-4599241529f5">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="87125fc0-e1a4-417e-9c1d-deff448e0389"/>
+								<text><![CDATA[Nama Barang]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="9fd004d5-c81d-4ee7-824d-3741016cfbe4"/>
+								<textFieldExpression><![CDATA[$F{barang_nama_barang}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="129" uuid="56efae0f-df94-4f79-a321-26bf77ab0bb8">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="129" height="30" uuid="8581b751-a0a9-4633-aa7e-ce19183066fb"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Jenis Barang]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="129" height="20" uuid="86a2dbdc-e874-4d55-b864-c14918d716e3"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{barang_jenis}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="128" uuid="49887853-3d9e-4024-8550-8678a09d0198">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="128" height="30" uuid="8e92484d-727f-4aba-9440-ce0457382071"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Harga Beli]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="128" height="20" uuid="c02569d8-96e6-465b-9605-72793f737fdb"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{barang_harga_beli}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="108" uuid="c341b3e2-03b6-4e39-ae33-66efd164e54a">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="108" height="30" uuid="5bc5fc40-8ea2-409c-8f7c-b6b68de27f21"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Harga Jual]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="108" height="20" uuid="b174222d-7f5c-4f16-a4e9-4db5d187a9ea"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{barang_harga_jual}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="46" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

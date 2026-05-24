@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import koneksi.koneksi;
 
-import tampilan.Nota;
+import tampilan.MenuUtama;
 
 public class form_login extends javax.swing.JFrame {
     private Connection conn =
@@ -24,7 +24,7 @@ int xx, xy;
     setLocationRelativeTo(null);
 }
     
-    private void login() {
+private void login() {
 
     try {
 
@@ -60,7 +60,8 @@ int xx, xy;
             "Login Berhasil"
             );
 
-            new Nota().setVisible(true);
+            // MASUK KE MENU UTAMA
+            new MenuUtama().setVisible(true);
 
             dispose();
 

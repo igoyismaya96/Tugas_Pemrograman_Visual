@@ -4,8 +4,12 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import koneksi.koneksi;
 import javax.swing.ButtonGroup;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Pelanggan extends javax.swing.JFrame {
     private Connection conn = new koneksi().connect();
@@ -36,9 +40,10 @@ public class Pelanggan extends javax.swing.JFrame {
 
     public Pelanggan() {
         initComponents();
+        setLocationRelativeTo(null);
         
         
-    buttonGroup1 = new ButtonGroup(); // ✅ WAJIB
+    buttonGroup1 = new ButtonGroup(); 
     buttonGroup1.add(rlaki);
     buttonGroup1.add(rperempuan);
         kosong();
@@ -115,6 +120,7 @@ protected void datatable(){
         tblplgn = new javax.swing.JTable();
         bcari = new javax.swing.JButton();
         txtcari = new javax.swing.JTextField();
+        btncetak = new javax.swing.JButton();
         txtid = new javax.swing.JTextField();
         txtnm = new javax.swing.JTextField();
         txttelp = new javax.swing.JTextField();
@@ -241,6 +247,13 @@ protected void datatable(){
             }
         });
 
+        btncetak.setText("Cetak");
+        btncetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncetakActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -248,21 +261,25 @@ protected void datatable(){
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtcari, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bcari)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btncetak)
+                        .addGap(23, 23, 23))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bcari, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(txtcari))
+                    .addComponent(bcari, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcari)
+                    .addComponent(btncetak, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addContainerGap())
@@ -482,6 +499,38 @@ datatable();
       }
     }//GEN-LAST:event_txtcariKeyPressed
 
+    private void btncetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncetakActionPerformed
+try {
+
+        // KONEKSI DATABASE
+        Connection conn = new koneksi().connect();
+
+        // LOKASI FILE JASPER
+        String path = "src/report/datapelanggan.jasper";
+
+        // LOAD FILE JASPER
+        JasperPrint jp = JasperFillManager.fillReport(
+            path,
+            null,
+            conn
+        );
+
+        // TAMPILKAN REPORT
+        JasperViewer.viewReport(
+            jp,
+            false
+        );
+
+    } catch (Exception e) {
+
+        JOptionPane.showMessageDialog(
+            null,
+            "Error Cetak : \n" + e.getMessage()
+        );
+
+    }
+    }//GEN-LAST:event_btncetakActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -523,6 +572,7 @@ datatable();
     private javax.swing.JButton bhapus;
     private javax.swing.JButton bkeluar;
     private javax.swing.JButton bsimpan;
+    private javax.swing.JButton btncetak;
     private javax.swing.JButton bubah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

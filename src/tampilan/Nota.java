@@ -10,8 +10,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JSpinner;
 import login.UserID;
-
+import java.util.HashMap;
 import koneksi.koneksi;
+import java.sql.Connection;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Nota extends javax.swing.JFrame {
 
@@ -25,6 +29,7 @@ public class Nota extends javax.swing.JFrame {
 
     public Nota() {
         initComponents();
+        setLocationRelativeTo(null);
 
         String KD = UserID.getuserLogin();
 
@@ -242,6 +247,7 @@ public void hitung() {
         bkeluar = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         txtttotal = new javax.swing.JTextField();
+        btnCetak = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -486,6 +492,13 @@ public void hitung() {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel14.setText("Total Harga");
 
+        btnCetak.setText("Cetak");
+        btnCetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -528,6 +541,8 @@ public void hitung() {
                         .addComponent(bbatal, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(bkeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCetak, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -571,7 +586,8 @@ public void hitung() {
                     .addComponent(bbatal)
                     .addComponent(bkeluar)
                     .addComponent(jLabel14)
-                    .addComponent(txtttotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtttotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCetak))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -807,6 +823,50 @@ public void hitung() {
     dispose();
     }//GEN-LAST:event_bkeluarActionPerformed
 
+    private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
+try {
+
+        // KONEKSI DATABASE
+        Connection conn =
+        new koneksi().connect();
+
+        // LOKASI FILE JASPER
+        String path =
+        "src/report/nota.jasper";
+
+        // PARAMETER REPORT
+        HashMap<String, Object> parameter =
+        new HashMap<>();
+
+        parameter.put(
+            "idnota",
+            txtidnota.getText()
+        );
+
+        // LOAD REPORT
+        JasperPrint jp =
+        JasperFillManager.fillReport(
+            path,
+            parameter,
+            conn
+        );
+
+        // TAMPILKAN REPORT
+        JasperViewer.viewReport(
+            jp,
+            false
+        );
+
+    } catch (Exception e) {
+
+        JOptionPane.showMessageDialog(
+            null,
+            "Error Cetak : \n"
+            + e
+        );
+    }
+    }//GEN-LAST:event_btnCetakActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -848,6 +908,7 @@ public void hitung() {
     private javax.swing.JButton bkeluar;
     private javax.swing.JButton bsimpan;
     private javax.swing.JButton btambah;
+    private javax.swing.JButton btnCetak;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabe2;
     private javax.swing.JLabel jLabel1;

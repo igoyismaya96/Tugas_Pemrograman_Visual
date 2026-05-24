@@ -241,7 +241,8 @@
                           <Component id="txtcari" min="-2" pref="130" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="bcari" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btncetak" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -255,6 +256,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="bcari" alignment="0" pref="34" max="32767" attributes="0"/>
                       <Component id="txtcari" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btncetak" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane5" pref="399" max="32767" attributes="0"/>
@@ -303,6 +305,14 @@
         <Component class="javax.swing.JTextField" name="txtcari">
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtcariKeyPressed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btncetak">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cetak"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncetakActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
